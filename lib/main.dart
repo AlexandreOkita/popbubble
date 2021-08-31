@@ -36,7 +36,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
   final _channel = WebSocketChannel.connect(
-    Uri.parse('wss://c9bb-2804-14c-483-80f5-c0b0-b5ff-312f-875b.ngrok.io/chat'),
+    Uri.parse('wss://popbubble-ws.herokuapp.com/chat'),
   );
 
   @override
