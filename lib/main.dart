@@ -94,9 +94,16 @@ class _ChatState extends State<Chat> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ChatBox(widget._channel, messages),
+
+          Expanded(
+              child: ChatBox(widget._channel, messages),
+              flex: 3,
+          ),
           const SizedBox(height: 24),
-          ChatForms(_controller, widget._channel, addMessage),
+          Expanded(
+              child: ChatForms(_controller, widget._channel, addMessage),
+              flex: 1,
+          ),
         ],
       ),
     );
@@ -163,20 +170,17 @@ class _ChatBoxState extends State<ChatBox> {
   Widget build(BuildContext context) {
 
         return Container(
-          height: 500,
           child: ListView.builder(
-            reverse: true,
-            shrinkWrap: true,
-            padding: const EdgeInsets.all(8),
-            itemCount: widget.messages.length,
-            itemBuilder: (BuildContext context, int index) {
-            return Container(
-              height: 50,
-              color: Colors.amber,
-              child: Center(child: List.of(widget.messages.reversed)[index])
-              );
-            }
-          )
+              reverse: true,
+              shrinkWrap: true,
+              padding: const EdgeInsets.all(8),
+              itemCount: widget.messages.length,
+              itemBuilder: (BuildContext context, int index) {
+              return Container(
+                child: Center(child: List.of(widget.messages.reversed)[index])
+                );
+              }
+          ),
         );
   }
 }
@@ -193,11 +197,11 @@ class BubbleChat extends StatelessWidget {
     return BubbleNormal(
       text: _text,
       isSender: _isSender,
-      color: _isSender ? Color(0xFFE8E8EE) : Color(0xFF1B97F3),
+      color: _isSender ? Colors.blue : Colors.purple,
       tail: true,
       textStyle: TextStyle(
         fontSize: 20,
-        color: _isSender ? Colors.black54 : Colors.white,
+        color: Colors.white
       )
     );
   }
