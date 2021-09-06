@@ -44,7 +44,7 @@ class _ChatState extends State<Chat> {
         children: [
 
           Expanded(
-            child: ChatBox(widget._channel),
+            child: ChatBox(messages),
             flex: 3,
           ),
           const SizedBox(height: 24),

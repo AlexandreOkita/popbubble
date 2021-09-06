@@ -27,6 +27,23 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+  <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyAKjKFXWBeQL8jTaljGz4OgUPxnYVoEnAk",
+        authDomain: "bubble-pop-aa804.firebaseapp.com",
+        projectId: "bubble-pop-aa804",
+        storageBucket: "bubble-pop-aa804.appspot.com",
+        messagingSenderId: "444077024206",
+        appId: "1:444077024206:web:16a16b59c9d5c8f2f7019f"
+        databaseURL: "https://bubble-pop-aa804.firebaseio.com",
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
