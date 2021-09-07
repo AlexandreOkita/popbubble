@@ -16,7 +16,8 @@ class CreateRoomButton extends StatelessWidget {
     return rooms
         .add({
       'description': _controller.text,
-      'createdAt': Timestamp.now()// John Doe
+      'createdAt': Timestamp.now(),
+      'id': DateTime.now().microsecondsSinceEpoch
     })
         .then((value) => print("Room Created"))
         .catchError((error) => print("Failed to add user: $error"));

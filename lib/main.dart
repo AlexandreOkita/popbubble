@@ -28,7 +28,7 @@ class _PopBubbleState extends State<PopBubble> {
         if (snapshot.connectionState == ConnectionState.done) {
           return MaterialApp(
             title: title,
-            home: ChatPage(
+            home: LobbyPage(
               title: title,
             ),
           );

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:popbubble/pages/ChatPage.dart';
 
 class RoomsList extends StatefulWidget {
 
@@ -11,9 +12,6 @@ class _RoomsListState extends State<RoomsList> {
 
   final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
       .collection('rooms').snapshots();
-  final _joinRoom = () => {
-    print("Vou dar join!")
-  };
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +31,13 @@ class _RoomsListState extends State<RoomsList> {
                 title: Padding(child: Text("${data['description']}"), padding: EdgeInsets.only(bottom: 6),),
                 subtitle: Text(dateToText((data['createdAt'] as Timestamp).toDate())),
                 trailing: Row(children: [Text("Join Room"), SizedBox(width: 10,), Icon(Icons.arrow_forward_ios, size: 16,)], mainAxisSize: MainAxisSize.min),
-                onTap: _joinRoom,
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ChatPage(title: data['description'], chatId: data["id"],)
+                      )
+                  );
+                },
               );
             }).toList(),
           );

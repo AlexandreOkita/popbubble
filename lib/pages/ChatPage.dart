@@ -7,9 +7,11 @@ class ChatPage extends StatefulWidget {
   const ChatPage({
     Key? key,
     required this.title,
+    required this.chatId,
   }) : super(key: key);
 
   final String title;
+  final int chatId;
 
   @override
   _ChatPageState createState() => _ChatPageState();
@@ -17,9 +19,14 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
 
-  final _channel = WebSocketChannel.connect(
-    Uri.parse('wss://popbubble-ws.herokuapp.com/chat/123'),
-  );
+  var _channel;
+
+  @override
+  void initState() {
+    _channel = WebSocketChannel.connect(
+      Uri.parse('wss://popbubble-ws.herokuapp.com/chat/${widget.chatId}'),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
