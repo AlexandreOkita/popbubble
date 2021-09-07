@@ -18,7 +18,7 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
 
   final _channel = WebSocketChannel.connect(
-    Uri.parse('wss://popbubble-ws.herokuapp.com/chat'),
+    Uri.parse('wss://popbubble-ws.herokuapp.com/chat/123'),
   );
 
   @override
