@@ -4,7 +4,7 @@ import 'package:popbubble/pages/ChatPage.dart';
 import 'package:popbubble/pages/LobbyPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main(){
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +31,7 @@ class _PopBubbleState extends State<PopBubble> {
             home: LobbyPage(
               title: title,
             ),
+            navigatorKey: navigatorKey,
           );
         }
         return Loading();
