@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:popbubble/components/chat/BubbleChat.dart';
+import 'package:popbubble/models/Message.dart';
 
 
 class ChatBox extends StatefulWidget {
 
-  final List<BubbleChat> messages;
+  final List<Widget> messages;
 
   ChatBox(this.messages);
 

@@ -1,7 +1,12 @@
+import 'dart:convert';
+
 import 'package:popbubble/components/chat/BubbleChat.dart';
 import 'package:popbubble/components/chat/ChatBox.dart';
 import 'package:popbubble/components/chat/ChatForms.dart';
 import 'package:flutter/material.dart';
+import 'package:popbubble/components/chat/SystemChip.dart';
+import 'package:popbubble/main.dart';
+import 'package:popbubble/models/Message.dart';
 
 
 class Chat extends StatefulWidget {
@@ -17,7 +22,7 @@ class Chat extends StatefulWidget {
 class _ChatState extends State<Chat> {
 
   final TextEditingController _controller = TextEditingController();
-  final List<BubbleChat> messages = [];
+  final List<Widget> messages = [];
 
   listenStream() {
     widget._channel.stream.listen((value) => {
@@ -26,7 +31,13 @@ class _ChatState extends State<Chat> {
   }
   void addMessage(text, isSender) {
     setState(() {
-      messages.add(BubbleChat(text, isSender));
+      Map<String, dynamic> messageMap = jsonDecode(text);
+      final message = Message.fromJson(messageMap);
+      if (message.author == Author.PERSON) {
+          messages.add(BubbleChat(message.message, isSender));
+      } else {
+        messages.add(SystemChip(message.message));
+      }
     });
   }
 

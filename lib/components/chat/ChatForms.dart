@@ -35,8 +35,9 @@ class _ChatFormsState extends State<ChatForms> {
 
   void _sendMessage() {
     if (widget._controller.text.isNotEmpty) {
+      final messageJson = "{ \"message\": \"${widget._controller.text}\", \"event\": \"MESSAGE\", \"author\": \"PERSON\" }";
       widget._channel.sink.add(widget._controller.text);
-      widget.addMessage(widget._controller.text, true);
+      widget.addMessage(messageJson, true);
       widget._controller.clear();
     }
   }
