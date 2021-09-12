@@ -17,7 +17,6 @@ class CreateRoomButton extends StatelessWidget {
   Future<void>? addUser() {
     // Call the user's CollectionReference to add a new user
     if (_controller.text.isNotEmpty) {
-      _controller.clear();
       final id = DateTime
           .now()
           .microsecondsSinceEpoch;
@@ -27,13 +26,14 @@ class CreateRoomButton extends StatelessWidget {
         'createdAt': Timestamp.now(),
         'id': id
       })
-          .then((value) =>
+          .then((value)
       {
+        _controller.clear();
         navigatorKey.currentState!.push(
             MaterialPageRoute(builder: (context) =>
-                ChatPage(title: _controller.text, chatId: id,)
+                ChatPage(title: _controller.text, chatId: id, isOwner: true, docId: value.id)
             )
-        )
+        );
       })
           .catchError((error) => print("Failed to add user: $error"));
     }

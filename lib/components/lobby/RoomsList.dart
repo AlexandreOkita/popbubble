@@ -10,13 +10,13 @@ class RoomsList extends StatefulWidget {
 
 class _RoomsListState extends State<RoomsList> {
 
-  final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
+  final Stream<QuerySnapshot> _roomsStream = FirebaseFirestore.instance
       .collection('rooms').snapshots();
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: _usersStream,
+        stream: _roomsStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return Text("Something went wrong");
@@ -34,7 +34,7 @@ class _RoomsListState extends State<RoomsList> {
                 onTap: () {
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ChatPage(title: data['description'], chatId: data["id"],)
+                      MaterialPageRoute(builder: (context) => ChatPage(title: data['description'], chatId: data["id"], isOwner: false,)
                       )
                   );
                 },
