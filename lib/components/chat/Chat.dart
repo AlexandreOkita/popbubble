@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:popbubble/components/chat/BubbleChat.dart';
 import 'package:popbubble/components/chat/ChatBox.dart';
 import 'package:popbubble/components/chat/ChatForms.dart';
@@ -24,15 +25,35 @@ class _ChatState extends State<Chat> {
   final TextEditingController _controller = TextEditingController();
   final List<Widget> messages = [];
 
+  void listen(value) {
+    final message = Message.fromJson(jsonDecode(value));
+    addMessage(message, false);
+    if (message.event == Event.DISCONNECTED)
+      showAlert();
+  }
+
+  void showAlert() {
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) => CupertinoAlertDialog(
+          title: const Text('O desconhecido acabou de sair da sala'),
+          content: const Text('A sala será excluída agora, obrigado!'),
+          actions: [
+            TextButton(onPressed: () { Navigator.pop(context); Navigator.pop(context); }, child: Text("Deixar a sala"))
+          ],
+        )
+    );
+  }
+
   listenStream() {
     widget._channel.stream.listen((value) => {
-      addMessage(value, false)
+      listen(value)
     });
   }
-  void addMessage(text, isSender) {
+  void addMessage(message, isSender) {
     setState(() {
-      Map<String, dynamic> messageMap = jsonDecode(text);
-      final message = Message.fromJson(messageMap);
+
       if (message.author == Author.PERSON) {
           messages.add(BubbleChat(message.message, isSender));
       } else {
